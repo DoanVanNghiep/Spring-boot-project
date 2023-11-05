@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+  <div layout:fragment="content">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>UserName</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Created Date</th>
+        </tr>
+        <tr th:each="customer : ${customer}">
+            <td><span th:text="${customer.id}"></span></td>
+            <td><span th:text="${customer.name}"></span></td>
+            <td><span th:text="${customer.username}"></span></td>
+            <td><span th:text="${customer.address}"></span></td>
+            <td><span th:text="${customer.email}"></span></td>
+            <td><span th:text="${customer.createdDate}"></span></td>
+        </tr>
+    </table>
+  </div>
+</body>
+</html>

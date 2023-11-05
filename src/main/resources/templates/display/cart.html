@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style-cart.css}">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <title>Cart - Manager Material</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                        <div class="col align-self-center text-right text-muted"><span th:text="${session.itemCount}"></span> items</div>
+                    </div>
+                </div>
+                <div class="row border-top border-bottom" th:each="item:${session.all_item} ">
+                    <div class="row main align-items-center">
+                            <div class="col-2"><img class="img-fluid" th:src="${item.product.image}"></div>
+
+                        <div class="col">
+                            <div class="row text-muted"><span th:text="${item.product.getName()}"></span></div>
+                        </div>
+                        <div class="col">
+                            <a href="#">-</a><a href="#" class="border"><span th:text="${item.qty}"></span></a><a href="#">+</a>
+                        </div>
+                        <div class="col"><span th:text="${#numbers.formatCurrency(item.product.price*70/100*item.qty)}"></span> <button><span class="close">X</span></button></div>
+                    </div>
+                </div>
+                <div class="back-to-shop"><a th:href="@{/view/manager-material/store}">&leftarrow; <span class="text-muted">Back to shop</span></a></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div><h5><b>Summary</b></h5></div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">ITEMS <span th:text="${session.itemCount}"></span></div>
+                    <div class="col text-right"><span th:text="${#numbers.formatCurrency(session.totalPrice*70/100)}"></span></div>
+                </div>
+                <form>
+                    <p>SHIPPING</p>
+                    <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                    <p>GIVE CODE</p>
+                    <input id="code" placeholder="Enter your code">
+                </form>
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right"><span th:text="${#numbers.formatCurrency(session.totalPrice*70/100)}"></span></div>
+                </div>
+                <a th:href="@{'/shopping-cart/addShoppingCart/' + ${session.customer.username}}"><button class="btn">ADD DATABASE</button></a>
+                <a th:if="${session.customer != null}" th:href="@{/shopping-cart/view/checkout}" ><button class="btn">CHECKOUT</button></a>
+                <a th:if="${session.customer == null}" th:href="@{/Customer/login}"><button class="btn">CHECKOUT</button></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}"></script>
+</body>
+</html>

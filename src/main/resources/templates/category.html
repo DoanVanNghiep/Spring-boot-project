@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Category List</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>IDParent</th>
+        <th>ICon</th>
+        <th>CreatedDate</th>
+        <th>CreatedBy</th>
+    </tr>
+    <tr th:each="category :${category}">
+        <td><span th:text="${category.id}"></span></td>
+        <td><span th:text="${category.name}"></span></td>
+        <td><span th:text="${category.idparent}"></span></td>
+        <td><span th:text="${category.icon}"></span></td>
+        <td><span th:text="${category.createdDate}"></span></td>
+        <td><span th:text="${category.createdBy}"></span></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
